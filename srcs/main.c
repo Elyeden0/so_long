@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:17:53 by abonnard          #+#    #+#             */
-/*   Updated: 2024/12/28 01:30:19 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/03 16:03:42 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,33 @@ static void render_map(t_map *map)
 	}
 }
 
+void exit_solong(t_map *map)
+{
+    int i;
+
+    if (map->plan)
+    {
+        i = 0;
+        while (i < map->height)
+            free(map->plan[i++]);
+        free(map->plan);
+    }
+    if (map->mlx)
+    {
+        free_textures(map);
+        if (map->win)
+            mlx_destroy_window(map->mlx, map->win);
+        mlx_destroy_display(map->mlx);
+        free(map->mlx);
+    }
+    exit(0);
+}
+
 int main(int ac, char **av)
 {
-	t_map map;
+    t_map map;
 
+    ft_memset(&map, 0, sizeof(t_map));
     if (ac != 2)
     {
         ft_putstr_fd("Error\nUsage: ./so_long maps/map_name.ber\n", 2);
@@ -85,17 +108,15 @@ int main(int ac, char **av)
     if (!check_file_extension(av[1]))
         return (1);
     map.mlx = mlx_init();
-    if (!map.mlx)
-        return (1);
-    if (!parse_map(&map, av[1]))
-        return (1);
+    if (!map.mlx || !parse_map(&map, av[1]))
+        exit_solong(&map);
+
     int win_width = map.width * 64;
     int win_height = map.height * 64;
     map.win = mlx_new_window(map.mlx, win_width, win_height, "so_long");
-    if (!map.win)
-        return (1);
-    if (!init_textures(&map))
-        return (1);
+    if (!map.win || !init_textures(&map))
+        exit_solong(&map);
+
     render_map(&map);
     mlx_hook(map.win, KeyPress, KeyPressMask, key_hook_close, &map);
     mlx_hook(map.win, DestroyNotify, StructureNotifyMask, close_game, &map);

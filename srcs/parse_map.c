@@ -6,93 +6,99 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:43:44 by abonnard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:07:50 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/03 16:03:00 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 #include "../libft/get_next_line.h"
 
-int	allocate_map_plan(t_map *map)
+static int count_map_lines(char *file)
 {
-	map->plan = ft_calloc(map->height + 1, sizeof(char *));
-	if (!map->plan)
-		return (0);
-	return (1);
+    int     fd;
+    int     lines;
+    char    *line;
+
+    fd = open(file, O_RDONLY);
+    if (fd < 0)
+        return (0);
+    lines = 0;
+    while (1)
+    {
+        line = get_next_line(fd);
+        if (!line)
+            break;
+        lines++;
+        free(line);
+    }
+    close(fd);
+    return (lines);
 }
 
-int	parse_map_plan(t_map *map)
+static char *clean_line(char *line)
 {
-	if (!allocate_map_plan(map))
-		return (0);
-	if (!read_map_line(map, 0))
-		return (0);
-	map->width = ft_strlen(map->plan[0]);
-	map->chunk_y = 1;
-	while (map->chunk_y < map->height)
-	{
-		if (!read_map_line(map, map->chunk_y))
-			return (0);
-		map->chunk_y++;
-	}
-	return (1);
+    char    *clean;
+    int     len;
+
+    if (!line)
+        return (NULL);
+    len = ft_strlen(line);
+    if (line[len - 1] == '\n')
+        line[len - 1] = '\0';
+    clean = ft_strdup(line);
+    free(line);
+    return (clean);
 }
 
-int	parse_map_size(t_map *map, char *line)
+static int read_map_to_array(t_map *map, char *file)
 {
-	int	i;
+    int     fd;
+    char    *line;
+    int     i;
 
-	i = 0;
-	while (line[i])
-	{
-		if (!ft_isdigit(line[i]))
-			return (0);
-		i++;
-	}
-	map->height = ft_atoi(line);
-	if (map->height < 1)
-		return (0);
-	return (1);
+    fd = open(file, O_RDONLY);
+    if (fd < 0)
+        return (0);
+    i = 0;
+    while (i < map->height)
+    {
+        line = get_next_line(fd);
+        map->plan[i] = clean_line(line);
+        if (!map->plan[i])
+        {
+            while (i > 0)
+                free(map->plan[--i]);
+            free(map->plan);
+            close(fd);
+            return (0);
+        }
+        i++;
+    }
+    close(fd);
+    return (1);
 }
 
-int	open_and_read_first_line(t_map *map, char *file, char **line)
+int parse_map(t_map *map, char *file)
 {
-	map->fd = open(file, O_RDONLY);
-	if (map->fd < 0)
-		return (0);
-	*line = get_next_line(map->fd);
-	if (!*line)
-	{
-		close(map->fd);
-		return (0);
-	}
-	return (1);
-}
+    map->height = count_map_lines(file);
+    if (map->height <= 0)
+        return (0);
 
-int	parse_map(t_map *map, char *file)
-{
-	char	*line;
+    map->plan = ft_calloc(map->height + 1, sizeof(char *));
+    if (!map->plan)
+        return (0);
 
-	if (!open_and_read_first_line(map, file, &line))
-		return (0);
-	if (!parse_map_size(map, line))
-	{
-		free(line);
-		close(map->fd);
-		return (0);
-	}
-	free(line);
-	if (!parse_map_plan(map))
-	{
-		close(map->fd);
-		return (0);
-	}
-	if (!check_map(map))
-	{
-		close(map->fd);
-		return (0);
-	}
-	get_player_pos(map);
-	close(map->fd);
-	return (1);
+    if (!read_map_to_array(map, file))
+        return (0);
+
+    map->width = ft_strlen(map->plan[0]);
+    if (!check_map(map))
+    {
+        int i = 0;
+        while (i < map->height)
+            free(map->plan[i++]);
+        free(map->plan);
+        return (0);
+    }
+    return (1);
 }
