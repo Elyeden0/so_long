@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:02:36 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/03 17:21:40 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:52:43 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,10 @@ int		handle_movement(int keycode, t_map *map);
 void	render_map(t_map *map);
 void	exit_solong(t_map *map);
 void	render_map(t_map *map);
+void	update_player_pos(t_map *map, int new_x, int new_y);
+void	draw_tile(t_map *map, int x, int y);
+void	initialize_game(t_map *map, char *file);
+int		init_textures(t_map *map);
+int		check_file_extension(char *file);
 
 #endif

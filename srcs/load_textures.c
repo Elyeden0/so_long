@@ -6,18 +6,17 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:30:44 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/03 17:15:34 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:32:40 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 #include "../libft/libft.h"
 
-
 static int	load_texture(t_map *map, t_texture *texture, char *path)
 {
-	int width;
-	int height;
+	int	width;
+	int	height;
 
 	texture->img = mlx_xpm_file_to_image(map->mlx, path, &width, &height);
 	if (!texture->img)
@@ -59,4 +58,3 @@ void	free_textures(t_map *map)
 	if (map->graph.exit.img)
 		mlx_destroy_image(map->mlx, map->graph.exit.img);
 }
-

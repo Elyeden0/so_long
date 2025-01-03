@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:43:44 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/03 17:15:13 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:32:18 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	count_map_lines(char *file)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		lines++;
 		free(line);
 	}
@@ -50,7 +50,7 @@ static char	*clean_line(char *line)
 	return (clean);
 }
 
-static int read_map_to_array(t_map *map, char *file)
+static int	read_map_to_array(t_map *map, char *file)
 {
 	int		fd;
 	char	*line;
@@ -78,7 +78,29 @@ static int read_map_to_array(t_map *map, char *file)
 	return (1);
 }
 
-int parse_map(t_map *map, char *file)
+static int	count_collectibles(char **map)
+{
+	int	x;
+	int	y;
+	int	count;
+
+	count = 0;
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'C')
+				count++;
+			x++;
+		}
+		y++;
+	}
+	return (count);
+}
+
+int	parse_map(t_map *map, char *file)
 {
 	int	i;
 
@@ -88,10 +110,8 @@ int parse_map(t_map *map, char *file)
 	map->plan = ft_calloc(map->height + 1, sizeof(char *));
 	if (!map->plan)
 		return (0);
-
 	if (!read_map_to_array(map, file))
 		return (0);
-
 	map->width = ft_strlen(map->plan[0]);
 	if (!check_map(map))
 	{
@@ -101,5 +121,6 @@ int parse_map(t_map *map, char *file)
 		free(map->plan);
 		return (0);
 	}
+	map->collec = count_collectibles(map->plan);
 	return (1);
 }
