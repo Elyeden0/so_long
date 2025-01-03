@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:02:36 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/03 16:04:44 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/03 17:21:40 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,9 @@ int		check_collectibles_exist(t_map *map);
 t_Llist	*store_collectibles(t_map *map);
 int		load_all_textures(t_map *map);
 void	free_textures(t_map *map);
+int		handle_movement(int keycode, t_map *map);
+void	render_map(t_map *map);
+void	exit_solong(t_map *map);
+void	render_map(t_map *map);
 
 #endif

@@ -35,6 +35,7 @@ SRCS     = $(SRC_DIR)/check_map.c \
 		   $(SRC_DIR)/player_data.c \
 		   $(SRC_DIR)/player_can_exit.c \
 		   $(SRC_DIR)/load_textures.c \
+		   $(SRC_DIR)/movement.c \
 		   $(SRC_DIR)/main.c \
 
 BONUS_SRCS = $(BONUS_DIR)/path \

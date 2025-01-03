@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:30:44 by abonnard          #+#    #+#             */
-/*   Updated: 2024/12/28 01:24:27 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/03 17:15:34 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 #include "../libft/libft.h"
 
 
-static int load_texture(t_map *map, t_texture *texture, char *path)
+static int	load_texture(t_map *map, t_texture *texture, char *path)
 {
-    int width;
-    int height;
+	int width;
+	int height;
 
-    texture->img = mlx_xpm_file_to_image(map->mlx, path, &width, &height);
-    if (!texture->img)
-    {
-        ft_putstr_fd("Error\nFailed to load texture: ", 2);
-        ft_putendl_fd(path, 2);
-        return (0);
-    }
-    texture->width = width;
-    texture->height = height;
-    return (1);
+	texture->img = mlx_xpm_file_to_image(map->mlx, path, &width, &height);
+	if (!texture->img)
+	{
+		ft_putstr_fd("Error\nFailed to load texture: ", 2);
+		ft_putendl_fd(path, 2);
+		return (0);
+	}
+	texture->width = width;
+	texture->height = height;
+	return (1);
 }
 
 int	load_all_textures(t_map *map)
