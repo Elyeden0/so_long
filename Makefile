@@ -1,5 +1,6 @@
 # Compiler and flags
 CC       = cc
+CFLAGS   = -Wall -Wextra -Werror
 
 
 # Colors for messages
