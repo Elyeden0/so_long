@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:30:44 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/03 18:32:40 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/05 17:51:52 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	load_all_textures(t_map *map)
 		return (0);
 	if (!load_texture(map, &map->graph.exit, "textures/exit.xpm"))
 		return (0);
+	if (!load_texture(map, &map->graph.exit_open, "textures/exit_open.xpm"))
+		return (0);
 	return (1);
 }
 
@@ -57,4 +59,6 @@ void	free_textures(t_map *map)
 		mlx_destroy_image(map->mlx, map->graph.player.img);
 	if (map->graph.exit.img)
 		mlx_destroy_image(map->mlx, map->graph.exit.img);
+	if (map->graph.exit_open.img)
+		mlx_destroy_image(map->mlx, map->graph.exit_open.img);
 }

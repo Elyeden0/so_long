@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:02:36 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/05 13:45:34 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/05 18:01:01 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_graph
 	struct s_texture	floor;
 	struct s_texture	black;
 	struct s_texture	exit;
+	struct s_texture	exit_open;
 	struct s_texture	player;
 }	t_graph;
 
@@ -103,5 +104,6 @@ void	draw_tile(t_map *map, int x, int y);
 void	initialize_game(t_map *map, char *file);
 int		init_textures(t_map *map);
 int		check_file_extension(char *file);
+void	update_exit_texture(t_map *map);
 
 #endif

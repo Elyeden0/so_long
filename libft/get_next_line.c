@@ -131,5 +131,10 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	buffer = get_next_buffer(buffer);
+	if (!buffer)
+	{
+		free(line);
+		return (NULL);
+	}
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:00:41 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/03 19:16:24 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/05 17:59:29 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,41 @@ static int	is_valid_move(t_map *map, int x, int y)
 	return (1);
 }
 
+void	update_exit_texture(t_map *map)
+{
+	int	x;
+	int	y;
+
+	if (map->collec == 0)
+	{
+		y = 0;
+		while (y < map->height)
+		{
+			x = 0;
+			while (x < map->width)
+			{
+				if (map->plan[y][x] == 'E')
+				{
+					mlx_put_image_to_window(map->mlx, map->win,
+						map->collec == 0 ? map->graph.exit_open.img
+						: map->graph.exit.img, x * 64, y * 64);
+				}
+				x++;
+			}
+			y++;
+		}
+	}
+
+
+}
+
 static void	handle_collectible(t_map *map, int x, int y)
 {
 	if (map->plan[y][x] == 'C')
 	{
 		map->collec--;
 		map->plan[y][x] = '0';
+		update_exit_texture(map);
 	}
 }
 
