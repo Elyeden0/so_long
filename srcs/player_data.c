@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 16:08:31 by abonnard          #+#    #+#             */
-/*   Updated: 2024/12/19 16:12:03 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/05 13:52:35 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ int	multiple_player(t_map *map)
 		y++;
 	}
 	if (count != 1)
-		return (0);
+	{
+		ft_putstr_fd("Error\nWrong amount of player found in map\n", 2);
+		exit_solong(map);
+	}
 	return (1);
 }

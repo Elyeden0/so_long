@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:08:52 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/03 18:51:33 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/05 14:14:52 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	close_game(void)
 	exit(0);
 }
 
-int	key_hook_close(int keycode, void *param)
+int	key_hook_close(int keycode)
 {
 	if (keycode == KEY_ESC)
 		close_game();
@@ -52,7 +52,10 @@ void	initialize_game(t_map *map, char *file)
 		exit_solong(map);
 	map->mlx = mlx_init();
 	if (!map->mlx || !parse_map(map, file))
+	{
+		ft_putstr_fd("Error\nInvalid map, please put a valid map\n", 2);
 		exit_solong(map);
+	}
 	get_player_pos(map);
 	update_player_pos(map, map->pos_x, map->pos_y);
 	win_width = map->width * 64;

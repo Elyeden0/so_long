@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:02:36 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/03 18:52:43 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/05 13:45:34 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_map
 # define WIN_SIZE_Y 600
 
 int		close_game(void);
-int		key_hook_close(int keycode, void *param);
+int		key_hook_close(int keycode);
 void	get_player_pos(t_map *map);
 int		map_is_rectangular(t_map *map);
 int		parse_map(t_map *map, char *file);

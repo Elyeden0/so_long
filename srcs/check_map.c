@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:56:02 by abonnard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:11:19 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/05 16:26:57 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	map_is_rectangular(t_map *map)
 	i = 0;
 	while (map->plan[i])
 	{
-		if (ft_strlen(map->plan[i]) != map->width)
+		if (ft_strlen(map->plan[i]) != (size_t)map->width)
 			return (0);
 		i++;
 	}
@@ -81,6 +81,12 @@ int	check_map(t_map *map)
 		return (0);
 	if (!multiple_player(map))
 		return (0);
+	if (!check_collectibles_exist(map))
+		return (0);
+	if (check_exit_accessible(map))
+		return (1);
+	if (check_path_valid(map))
+		return (1);
 	return (1);
 }
 

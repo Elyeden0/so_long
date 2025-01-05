@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:43:44 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/03 18:32:18 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/05 14:32:48 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int	parse_map(t_map *map, char *file)
 		while (i < map->height)
 			free(map->plan[i++]);
 		free(map->plan);
+		map->plan = NULL;
 		return (0);
 	}
 	map->collec = count_collectibles(map->plan);
