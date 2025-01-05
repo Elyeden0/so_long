@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:00:41 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/05 18:36:03 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/05 18:47:54 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	handle_collectible(t_map *map, int x, int y)
 	{
 		map->collec--;
 		map->plan[y][x] = '0';
-		update_exit_texture(map);
 	}
 }
 

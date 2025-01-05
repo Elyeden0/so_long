@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:02:36 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/05 18:26:18 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/05 18:48:30 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,5 @@ void	draw_tile(t_map *map, int x, int y);
 void	initialize_game(t_map *map, char *file);
 int		init_textures(t_map *map);
 int		check_file_extension(char *file);
-void	update_exit_texture(t_map *map);
-void	put_exit_texture(t_map *map, int x, int y);
 
 #endif
