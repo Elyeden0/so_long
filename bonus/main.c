@@ -6,11 +6,11 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:17:53 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/06 17:59:39 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:04:40 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 int	init_textures(t_map *map)
 {

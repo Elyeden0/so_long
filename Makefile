@@ -14,7 +14,7 @@ BOX_BOTTOM = ╚═════════════════════�
 
 # Directories
 SRC_DIR  = srcs
-BONUS_DIR = bonus_srcs
+BONUS_DIR = bonus
 OBJ_DIR  = objs
 LIBFT_DIR = libft
 MLX_DIR  = .minilibx-linux
@@ -32,15 +32,22 @@ BONUS_INCLUDES = -Ibonus_include -I$(MLX_DIR) -I$(LIBFT_DIR)
 SRCS     = $(SRC_DIR)/check_map.c \
 		   $(SRC_DIR)/tools.c \
 		   $(SRC_DIR)/check_exit_and_coll.c \
-           $(SRC_DIR)/parse_map.c \
+		   $(SRC_DIR)/parse_map.c \
 		   $(SRC_DIR)/player_data.c \
 		   $(SRC_DIR)/player_can_exit.c \
 		   $(SRC_DIR)/load_textures.c \
 		   $(SRC_DIR)/movement.c \
 		   $(SRC_DIR)/main.c \
 
-BONUS_SRCS = $(BONUS_DIR)/path \
-           $(BONUS_DIR)
+BONUS_SRCS = $(BONUS_DIR)/check_exit_and_coll.c \
+             $(BONUS_DIR)/check_map.c \
+			 $(BONUS_DIR)/load_textures.c \
+			 $(BONUS_DIR)/main.c \
+			 $(BONUS_DIR)/movement.c \
+			 $(BONUS_DIR)/parse_map.c \
+			 $(BONUS_DIR)/player_can_exit.c \
+			 $(BONUS_DIR)/player_data.c \
+			 $(BONUS_DIR)/tools.c \
 
 OBJS     = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
@@ -88,7 +95,9 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 
 $(BONUS_NAME): $(BONUS_OBJS) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBS) -o $(BONUS_NAME)
-	@echo "Bonus version compiled."
+	@echo "$(GREEN)$(BOX_TOP)"
+	@echo "║ Bonus ver. compiled. ║$(RESET)"
+	@echo "$(GREEN)$(BOX_BOTTOM)$(RESET)"
 
 # Clean object files
 clean:
@@ -104,7 +113,7 @@ fclean: clean
 	@$(MAKE) -s -C $(LIBFT_DIR) fclean
 	@echo "$(GREEN)MinilibX cleaned.$(RESET)"
 	@rm -f $(NAME) $(BONUS_NAME)
-	@echo "Full clean done."
+	@echo "$(GREEN)Full clean done.$(RESET)"
 
 # Rebuild
 re: fclean all

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 15:02:36 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/06 18:22:41 by abonnard         ###   ########.fr       */
+/*   Created: 2025/01/06 14:17:31 by abonnard          #+#    #+#             */
+/*   Updated: 2025/01/06 18:32:30 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "keymap.h"
 # include "../libft/libft.h"
@@ -21,6 +21,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_coord
 {
@@ -43,6 +44,13 @@ typedef struct s_graph
 {
 	struct s_texture	wall;
 	struct s_texture	coin0;
+	struct s_texture	coin1;
+	struct s_texture	coin2;
+	struct s_texture	coin3;
+	struct s_texture	coin4;
+	struct s_texture	coin5;
+	struct s_texture	coin6;
+	struct s_texture	coin7;
 	struct s_texture	floor;
 	struct s_texture	black;
 	struct s_texture	exit;
