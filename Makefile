@@ -30,6 +30,7 @@ BONUS_INCLUDES = -Ibonus_include -I$(MLX_DIR) -I$(LIBFT_DIR)
 
 # Source files and object files
 SRCS     = $(SRC_DIR)/check_map.c \
+		   $(SRC_DIR)/check_map_tools.c \
 		   $(SRC_DIR)/tools.c \
 		   $(SRC_DIR)/check_exit_and_coll.c \
 		   $(SRC_DIR)/parse_map.c \

@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:23:01 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/13 11:39:22 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:54:25 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,41 +53,43 @@ int	check_exit_accessible(t_map *map)
 	return (check_exit_after_flood(tmp_map, x, y));
 }
 
-int check_path_valid(t_map *map)
+int	setup_flood_fill(t_map *map, t_map *tmp)
 {
-    t_map	tmp;
-    int		x;
-    int		y;
-    int		valid;
+	ft_memset(tmp, 0, sizeof(t_map));
+	tmp->width = map->width;
+	tmp->height = map->height;
+	tmp->plan = copy_map(map);
+	if (!tmp->plan)
+		return (0);
+	get_player_pos(tmp);
+	flood_fill(tmp, tmp->pos_x, tmp->pos_y);
+	return (1);
+}
 
-    ft_memset(&tmp, 0, sizeof(t_map));
-    tmp.width = map->width;
-    tmp.height = map->height;
-    tmp.plan = copy_map(map);
-    if (!tmp.plan)
-        return (0);
+int	check_path_valid(t_map *map)
+{
+	t_map	tmp;
+	int		x;
+	int		y;
+	int		valid;
 
-    // Get player position
-    get_player_pos(&tmp);
-
-    // Perform flood fill from player position
-    flood_fill(&tmp, tmp.pos_x, tmp.pos_y);
-
-    y = -1;
-    valid = 1;
-    while (++y < map->height && valid)
-    {
-        x = -1;
-        while (++x < map->width && valid)
-        {
-            if ((map->plan[y][x] == 'C' || map->plan[y][x] == 'E')
-                && tmp.plan[y][x] != 'F')
-            {
-                ft_putstr_fd("Error\nNot all collectibles/exit are reachable\n", 2);
-                valid = 0;
-            }
-        }
-    }
-    free_tmp_map(tmp.plan, map->height);
-    return (valid);
+	if (!setup_flood_fill(map, &tmp))
+		return (0);
+	y = -1;
+	valid = 1;
+	while (++y < map->height && valid)
+	{
+		x = -1;
+		while (++x < map->width && valid)
+		{
+			if ((map->plan[y][x] == 'C' || map->plan[y][x] == 'E')
+				&& tmp.plan[y][x] != 'F')
+			{
+				ft_putstr_fd("Error\nNot everything is reachable\n", 2);
+				valid = 0;
+			}
+		}
+	}
+	free_tmp_map(tmp.plan, map->height);
+	return (valid);
 }
