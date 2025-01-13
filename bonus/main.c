@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:17:53 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/06 18:04:40 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/08 09:30:02 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ int	init_textures(t_map *map)
 			"textures/player.xpm", &width, &height);
 	map->graph.exit.img = mlx_xpm_file_to_image(map->mlx,
 			"textures/exit.xpm", &width, &height);
-	map->graph.coin0.img = mlx_xpm_file_to_image(map->mlx,
-			"textures/coin0.xpm", &width, &height);
+	init_coin_texture(map);
 	if (!map->graph.wall.img || !map->graph.floor.img
 		|| !map->graph.player.img
-		||!map->graph.exit.img || !map->graph.coin0.img)
+		||!map->graph.exit.img)
 		return (0);
 	return (1);
 }

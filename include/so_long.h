@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 15:02:36 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/06 18:22:41 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:26:15 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int		check_exit_accessible(t_map *map);
 int		check_multiple_exit(t_map *map);
 int		check_exit_accessible(t_map *map);
 int		check_path_valid(t_map *map);
+char	**copy_map(t_map *map);
+void	free_tmp_map(char **map, int height);
 int		check_collectibles_exist(t_map *map);
 t_Llist	*store_collectibles(t_map *map);
 int		load_all_textures(t_map *map);

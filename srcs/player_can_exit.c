@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:23:01 by abonnard          #+#    #+#             */
-/*   Updated: 2024/12/20 22:45:02 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:39:22 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,41 +53,41 @@ int	check_exit_accessible(t_map *map)
 	return (check_exit_after_flood(tmp_map, x, y));
 }
 
-static int	check_collectibles_reachable(char **map)
+int check_path_valid(t_map *map)
 {
-	int	x;
-	int	y;
+    t_map	tmp;
+    int		x;
+    int		y;
+    int		valid;
 
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] == 'C')
-			{
-				ft_putstr_fd("Error\nCollectible not reachable\n", 2);
-				return (0);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (1);
-}
+    ft_memset(&tmp, 0, sizeof(t_map));
+    tmp.width = map->width;
+    tmp.height = map->height;
+    tmp.plan = copy_map(map);
+    if (!tmp.plan)
+        return (0);
 
-int	check_path_valid(t_map *map)
-{
-	int		x;
-	int		y;
-	char	**tmp_map;
+    // Get player position
+    get_player_pos(&tmp);
 
-	tmp_map = map->plan;
-	if (!find_exit_position(tmp_map, &x, &y))
-		return (0);
-	if (!flood_fill(map, map->pos_x, map->pos_y))
-		return (0);
-	if (!check_exit_after_flood(tmp_map, x, y))
-		return (0);
-	return (check_collectibles_reachable(tmp_map));
+    // Perform flood fill from player position
+    flood_fill(&tmp, tmp.pos_x, tmp.pos_y);
+
+    y = -1;
+    valid = 1;
+    while (++y < map->height && valid)
+    {
+        x = -1;
+        while (++x < map->width && valid)
+        {
+            if ((map->plan[y][x] == 'C' || map->plan[y][x] == 'E')
+                && tmp.plan[y][x] != 'F')
+            {
+                ft_putstr_fd("Error\nNot all collectibles/exit are reachable\n", 2);
+                valid = 0;
+            }
+        }
+    }
+    free_tmp_map(tmp.plan, map->height);
+    return (valid);
 }

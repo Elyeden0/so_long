@@ -6,7 +6,7 @@
 /*   By: abonnard <abonnard@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:17:31 by abonnard          #+#    #+#             */
-/*   Updated: 2025/01/06 18:32:30 by abonnard         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:07:44 by abonnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,8 @@ void	draw_tile(t_map *map, int x, int y);
 void	initialize_game(t_map *map, char *file);
 int		init_textures(t_map *map);
 int		check_file_extension(char *file);
+int		init_coin_texture(t_map *map);
+void	coin_animation(t_map *map);
+int		update_animation(void *param);
 
 #endif

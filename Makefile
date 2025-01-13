@@ -48,6 +48,7 @@ BONUS_SRCS = $(BONUS_DIR)/check_exit_and_coll.c \
 			 $(BONUS_DIR)/player_can_exit.c \
 			 $(BONUS_DIR)/player_data.c \
 			 $(BONUS_DIR)/tools.c \
+			 $(BONUS_DIR)/animation.c \
 
 OBJS     = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

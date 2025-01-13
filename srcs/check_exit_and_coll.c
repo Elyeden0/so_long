@@ -14,26 +14,29 @@
 
 int	check_multiple_exit(t_map *map)
 {
-	int	x;
-	int	y;
-	int	count;
+    int	x;
+    int	y;
+    int	count;
 
-	count = 0;
-	y = 0;
-	while (map->plan[y])
-	{
-		x = 0;
-		while (map->plan[y][x])
-		{
-			if (map->plan[y][x] == 'E')
-				count++;
-			x++;
-		}
-		y++;
-	}
-	if (count != 1)
-		return (0);
-	return (1);
+    count = 0;
+    y = 0;
+    while (map->plan[y])
+    {
+        x = 0;
+        while (map->plan[y][x])
+        {
+            if (map->plan[y][x] == 'E')
+                count++;
+            x++;
+        }
+        y++;
+    }
+    if (count != 1)
+    {
+        ft_putstr_fd("Error\nMap must have exactly one exit\n", 2);
+        return (0);
+    }
+    return (1);
 }
 
 int	check_collectibles_exist(t_map *map)
