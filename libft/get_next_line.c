@@ -130,6 +130,6 @@ char	*get_next_line(int fd)
 		buffer = NULL;
 		return (NULL);
 	}
-	buffer = next_buffer(buffer);
+	buffer = get_next_buffer(buffer);
 	return (line);
 }
